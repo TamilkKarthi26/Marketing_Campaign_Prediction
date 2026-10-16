@@ -2,18 +2,19 @@
 
 ## Project Overview
 
-This project uses data analysis and machine learning to evaluate marketing campaign performance across three beauty and cosmetics brands: **Nykaa, Purplle, and Tira**.
+An end-to-end data science project that analyzes marketing campaign performance across three beauty and cosmetics brands: **Nykaa, Purplle, and Tira**.
 
-The project aims to help businesses understand campaign performance, predict revenue, and classify campaigns according to their expected profitability.
+The project uses data analysis and machine learning to predict campaign revenue and classify campaigns as profitable or loss-making. A Streamlit application provides an interactive interface for generating predictions.
 
 ## Business Objectives
 
 - Analyze marketing campaign performance across multiple brands.
 - Clean and preprocess campaign datasets.
-- Explore relationships between campaign characteristics and business outcomes.
-- Predict campaign revenue using a regression model.
-- Classify campaigns as profitable or loss-making using a classification model.
-- Present predictions through an interactive Streamlit application.
+- Perform exploratory data analysis (EDA).
+- Engineer features for machine learning.
+- Predict campaign revenue using regression.
+- Classify campaign profitability using classification.
+- Present model predictions through an interactive Streamlit application.
 
 ## Brands Covered
 
@@ -31,68 +32,65 @@ The project aims to help businesses understand campaign performance, predict rev
 - **Application:** Streamlit
 - **Development Environment:** Jupyter Notebook
 
-## Project Workflow
-
-1. Collect and combine the three brand datasets.
-2. Inspect the data and handle missing values and data-quality issues.
-3. Perform exploratory data analysis (EDA).
-4. Prepare features for machine learning.
-5. Train a regression model for revenue prediction.
-6. Train a classification model for profit/loss prediction.
-7. Evaluate model performance using appropriate metrics.
-8. Integrate the trained models into a Streamlit application.
-
 ## Dataset Summary
 
 The combined dataset contains approximately **166,665 records** from the three brand datasets before feature engineering.
 
-The project includes campaign-related information such as:
+Campaign-related variables include duration, impressions, clicks, leads, conversions, acquisition cost, engagement metrics, dates, and marketing channels.
 
-- Campaign duration
-- Impressions and clicks
-- Leads and conversions
-- Campaign cost
-- Engagement metrics
-- Campaign dates
-- Brand and marketing channel information
+The data was used for exploratory analysis, feature engineering, and predictive modeling.
 
-The dataset was used for analysis and predictive modeling.
+## Project Workflow
+
+1. Combine the three brand datasets.
+2. Inspect data quality and handle missing values.
+3. Perform exploratory data analysis.
+4. Engineer and prepare model features.
+5. Train a revenue regression model.
+6. Train a profit/loss classification model.
+7. Evaluate model performance.
+8. Integrate the trained models into a Streamlit application.
 
 ## Machine Learning Models and Results
 
 ### 1. Revenue Prediction
 
-A regression model was developed to predict campaign revenue.
+A Random Forest regression model predicts campaign revenue.
 
-| Evaluation Metric | Result |
+The final model uses 15 features and excludes ROI as an input.
+
+| Evaluation Metric | Final Result |
 |---|---:|
-| RMSE | 140,260 |
-| MAE | 53,995 |
-| R² Score | 0.913 |
+| RMSE | 253,269.72 |
+| MAE | 164,760.44 |
+| R² Score | 0.7169 |
 
-The model achieved an R² score of 0.913 on the evaluation data. RMSE and MAE measure prediction error; their interpretation depends on the revenue unit and evaluation setup.
+**Interpretation:** The model explains approximately 71.7% of the variance in the evaluation dataset. RMSE and MAE quantify prediction error in the target's units. These results provide a baseline for further model improvement.
+
+The reported results are specific to the evaluation setup and should not be interpreted as guaranteed performance on new campaigns.
 
 ### 2. Profit/Loss Classification
 
-A classification model was developed to predict whether a campaign would be profitable or result in a loss.
+A classification model predicts whether a campaign is profitable or loss-making.
 
-| Evaluation Metric | Result |
+| Evaluation Metric | Previously Recorded Result |
 |---|---:|
 | Accuracy | 85.71% |
 | Precision | 86.62% |
 | Recall | 88.20% |
 | F1 Score | 87.40% |
 
-These results describe the model evaluation previously recorded for this project. Performance on unseen business data may differ.
+These are the previously recorded evaluation results for the classification model. Performance should be revalidated on unseen data before business deployment.
 
 ## Streamlit Application
 
-The application allows users to enter campaign information and obtain:
+The interactive application provides:
 
-- Predicted campaign revenue
-- Predicted profit/loss category
+- Predicted campaign revenue.
+- Predicted profit/loss category.
+- A user interface for entering campaign information.
 
-The application connects the trained machine learning models with a user-friendly interface.
+The application loads saved machine learning models and their associated feature lists using Joblib.
 
 ## Project Structure
 
@@ -102,47 +100,50 @@ Marketing_Campaign_Prediction/
 ├── notebooks/
 │   └── marketing_campaign_analysis.ipynb
 ├── models/
+│   ├── README.md
+│   ├── revenue_prediction_model_final.pkl
+│   ├── regression_features_final.pkl
 │   ├── revenue_prediction_model.pkl
-│   ├── profit_prediction_model.pkl
 │   ├── regression_features.pkl
-│   └── classification_features.pkl
+│   ├── profit_prediction_model.pkl
+│   ├── classification_features.pkl
+│   └── classification_scaler.pkl
 ├── app.py
 ├── requirements.txt
 └── README.md
 ```
 
-*Note: The structure above is illustrative. Adjust it to match the files actually included in the repository.*
+*The structure illustrates the expected project layout. Some files may differ depending on the current repository contents.*
 
 ## How to Run the Project
 
 ### Prerequisites
 
-Install Python and ensure that the required project files are available.
+- Python installed on your computer.
+- The project repository and required model files.
 
-### Installation
-
-Clone the repository:
+### 1. Clone the repository
 
 ```bash
 git clone YOUR_GITHUB_REPOSITORY_URL
 cd Marketing_Campaign_Prediction
 ```
 
-Install the dependencies:
+Replace `YOUR_GITHUB_REPOSITORY_URL` with your actual repository URL.
+
+### 2. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-Run the Streamlit application:
+### 3. Run the Streamlit application
 
 ```bash
 streamlit run app.py
 ```
 
-Replace `YOUR_GITHUB_REPOSITORY_URL` with the actual URL of your GitHub repository.
-
-Ensure that the trained model files and application paths match the project structure before running the application.
+Ensure that the model filenames and paths in `app.py` match the files in the `models/` directory.
 
 ## Skills Demonstrated
 
@@ -150,24 +151,24 @@ Ensure that the trained model files and application paths match the project stru
 - Data cleaning and preprocessing
 - Exploratory data analysis
 - Feature engineering
-- Regression modeling
-- Classification modeling
+- Regression and classification
 - Model evaluation
-- Model integration
-- Interactive dashboard development
+- Machine learning model persistence
+- Streamlit application development
 - Business-focused data analysis
 
 ## Future Improvements
 
-- Compare additional regression and classification algorithms.
-- Improve model validation and generalization.
-- Add visual campaign performance dashboards.
-- Evaluate profitability across brands and marketing channels.
-- Deploy the application for public access.
+- Compare additional machine learning algorithms.
+- Improve validation and model generalization.
+- Analyze performance by brand and marketing channel.
+- Improve the dashboard with additional visualizations.
+- Validate predictions on genuinely unseen campaign data.
+- Deploy the application for broader access.
 
 ## Conclusion
 
-This project demonstrates an end-to-end machine learning workflow for marketing campaign analysis, revenue prediction, and profitability classification. It combines data preparation, predictive modeling, evaluation, and application development to support data-driven marketing decisions.
+This project demonstrates an end-to-end machine learning workflow for marketing campaign analysis, revenue prediction, and profitability classification. It combines data preparation, predictive modeling, model evaluation, and interactive application development to explore how machine learning can support marketing decisions.
 
 ---
 
