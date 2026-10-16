@@ -20,7 +20,7 @@ model_path = "models"
 revenue_model = joblib.load(
     os.path.join(
         model_path,
-        "revenue_prediction_model.pkl"
+       "revenue_prediction_model_final.pkl"    
     )
 )
 
